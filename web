@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Apex Call Solutions | High-Performance Outbound & Appointment Setting</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Apex Call Solutions is a high-performance outbound calling and appointment-setting agency. We generate qualified leads and book sales appointments so you can focus on closing." />
+  <style>
+    :root {
+      --bg: #050915;
+      --bg-alt: #0b1120;
+      --primary: #2a7bff;
+      --primary-soft: #00c6ff;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #1f2933;
+      --card: #111827;
+      --border: #1f2937;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+      --radius-lg: 18px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+    }
+
+    .shell {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+
+    header {
+      padding: 12px 0 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: conic-gradient(
+        from 210deg,
+        var(--primary),
+        var(--primary-soft),
+        #4b8bff,
+        var(--primary)
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(0, 198, 255, 0.6);
+    }
+
+    .logo-icon span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .logo-text-main {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .logo-text-sub {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.2em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    .nav-cta {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+      color: white;
+      font-weight: 600;
+      font-size: 13px;
+      box-shadow: 0 10px 30px rgba(0, 198, 255, 0.45);
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 32px;
+      padding: 40px 0 32px;
+      align-items: center;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: rgba(15, 23, 42, 0.7);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 18px;
+    }
+
+    .hero-tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e, #166534);
+      box-shadow: 0 0 12px #22c55e;
+    }
+
+    .hero-title {
+      font-size: clamp(32px, 4vw, 42px);
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(90deg, var(--primary-soft), var(--primary));
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      max-width: 460px;
+      margin-bottom: 24px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-soft));
+      border: none;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 10px 18px;
+      background: transparent;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      color: var(--text-muted);
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .hero-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-metric strong {
+      display: block;
+      font-size: 16px;
+      color: var(--text-main);
+    }
+
+    /* HERO RIGHT */
+
+    .hero-card {
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at top left, #172554 0, #020617 60%);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-badge {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--text-muted);
+    }
+
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .hero-card-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+    }
+
+    .hero-card-pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-graph {
+      margin-top: 8px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(30, 64, 175, 0.7);
+    }
+
+    .hero-graph-bars {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+      align-items: flex-end;
+      height: 120px;
+      margin-bottom: 8px;
+    }
+
+    .hero-graph-bar {
+      border-radius: 999px;
+      background: linear-gradient(
+        180deg,
+        rgba(191, 219, 254, 0.2),
+        var(--primary)
+      );
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.6);
+    }
+
+    .hero-graph-bar:nth-child(7) {
+      background: linear-gradient(
+        180deg,
+        rgba(74, 222, 128, 0.3),
+        #22c55e
+      );
+      box-shadow: 0 8px 22px rgba(34, 197, 94, 0.65);
+    }
+
+    .hero-graph-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .hero-mini-metrics {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    .hero-mini-metrics strong {
+      color: var(--text-main);
+      font-size: 13px;
+    }
+
+    /* SECTIONS */
+
+    section {
+      padding: 32px 0 12px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      padding: 14px;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle, var(--primary-soft), var(--primary));
+      box-shadow: 0 0 10px var(--primary-soft);
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .step {
+      padding: 12px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed rgba(148, 163, 184, 0.6);
+      background: rgba(15, 23, 42, 0.8);
+      font-size: 12px;
+    }
+
+    .step-num {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .step strong {
+      font-size: 13px;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .cta-strip {
+      margin: 30px 0 40px;
+      padding: 18px 18px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at left, #1d4ed8 0, #020617 50%);
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-strip p {
+      font-size: 13px;
+      color: #e5e7eb;
+      max-width: 420px;
+    }
+
+    .cta-strip strong {
+      font-size: 15px;
+    }
+
+    /* FOOTER */
+
+    footer {
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding: 16px 0 6px;
+      margin-top: auto;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 880px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links {
+        display: none;
+      }
+      .hero {
+        padding-top: 26px;
+      }
+      .grid-3,
+      .process-steps {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .cta-strip {
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="shell">
+
+      <!-- HEADER -->
+      <header>
+        <nav class="nav">
+          <div class="logo-wrap">
+            <div class="logo-icon">
+              <!-- Replace this with your actual logo as an <img> if you want -->
+              <span>A</span>
+            </div>
+            <div>
+              <div class="logo-text-main">Apex Call Solutions</div>
+              <div class="logo-text-sub">Outbound · Appointments</div>
+            </div>
+          </div>
+
+          <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#process">Process</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#book" class="nav-cta">Book a Call</a>
+          </div>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      <main>
+        <section class="hero">
+          <div>
+            <div class="hero-tag">
+              <span class="hero-tag-dot"></span>
+              <span>High-ticket outbound engine</span>
+            </div>
+            <h1 class="hero-title">
+              We book the calls.<br />
+              <span class="hero-highlight">You close the deals.</span>
+            </h1>
+            <p class="hero-subtitle">
+              Apex Call Solutions builds and runs your outbound sales machine:
+              cold calls, follow-up, and appointment-setting so your team speaks
+              only with qualified buyers.
+            </p>
+            <div class="hero-ctas">
+              <button class="btn-primary" onclick="document.getElementById('book').scrollIntoView({behavior:'smooth'});">
+                Book a Strategy Call
+              </button>
+              <button class="btn-ghost" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'});">
+                View Services →
+              </button>
+            </div>
+            <div class="hero-metrics">
+              <div class="hero-metric">
+                <strong>3–7x</strong>
+                Increase in booked calls
+              </div>
+              <div class="hero-metric">
+                <strong>90%+</strong>
+                Show-up rates with our follow-up
+              </div>
+              <div class="hero-metric">
+                <strong>Done-for-you</strong>
+                Outbound + appointment setting
+              </div>
+            </div>
+          </div>
+
+          <!-- Right hero card (fake dashboard) -->
+          <div class="hero-card" aria-hidden="true">
+            <div class="hero-card-badge">Live outbound performance</div>
+            <div class="hero-card-header">
+              <div>
+                <div class="hero-card-title">Weekly Pipeline</div>
+              </div>
+              <div class="hero-card-pill">Accounts • Apex OS</div>
+            </div>
+
+            <div class="hero-graph">
+              <div class="hero-graph-bars">
+                <div class="hero-graph-bar" style="height: 35%;"></div>
+                <div class="hero-graph-bar" style="height: 45%;"></div>
+                <div class="hero-graph-bar" style="height: 52%;"></div>
+                <div class="hero-graph-bar" style="height: 60%;"></div>
+                <div class="hero-graph-bar" style="height: 72%;"></div>
+                <div class="hero-graph-bar" style="height: 80%;"></div>
+                <div class="hero-graph-bar" style="height: 95%;"></div>
+              </div>
+              <div class="hero-graph-labels">
+                <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+              </div>
+
+              <div class="hero-mini-metrics">
+                <div>
+                  <span>Qualified calls this week</span><br />
+                  <strong>147</strong>
+                </div>
+                <div>
+                  <span>Booked appointments</span><br />
+                  <strong>63</strong>
+                </div>
+                <div>
+                  <span>Show-up rate</span><br />
+                  <strong>91%</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services">
+          <div class="section-label">What we do</div>
+          <h2 class="section-title">Done-for-you outbound & appointment setting.</h2>
+          <p class="section-subtitle">
+            We design and run the outbound engine your business needs: targeted
+            outreach, professional conversations, and predictable calendars filled
+            with qualified prospects.
+          </p>
+
+          <div class="grid-3">
+            <div class="card">
+              <div class="badge">
+                <span class="badge-dot"></span>
+                Cold Calling
+              </div>
+              <h3>Outbound Cold Calling</h3>
+              <p>
+                We call your ideal prospects, qualify them, handle objections, and
+                move the right people straight onto your calendar.
+              </p>
+            </div>
+            <div class="card">
+              <div class="badge">
+                <span class="badge-dot"></span>
+                Appointments
+              </div>
+              <h3>Appointment Setting</h3>
+              <p>
+                Our team sets clean, clear appointments that your closers can step
+                into ready to present and close the deal.
+              </p>
+            </div>
+            <div class="card">
+              <div class="badge">
+                <span class="badge-dot"></span>
+                Pipeline
+              </div>
+              <h3>Lead Warming & Follow-Up</h3>
+              <p>
+                We revive old leads, nurture new ones, and follow up relentlessly
+                so no opportunity slips through the cracks.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- PROCESS -->
+        <section id="process">
+          <div class="section-label">How it works</div>
+          <h2 class="section-title">Simple, transparent, results-driven.</h2>
+          <p class="section-subtitle">
+            Our framework is designed to plug directly into your existing sales
+            process and support your closers with a consistent flow of booked
+            calls.
+          </p>
+
+          <div class="process-steps">
+            <div class="step">
+              <div class="step-num">Step 01</div>
+              <strong>Strategy & Targeting</strong>
+              <p>
+                We define your ideal customer, target markets, and offer so we
+                only talk to prospects who can actually buy.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">Step 02</div>
+              <strong>Outbound Engine</strong>
+              <p>
+                We launch outbound calling and follow-up systems with scripts,
+                talk tracks, and daily execution from our team.
+              </p>
+            </div>
+            <div class="step">
+              <div class="step-num">Step 03</div>
+              <strong>Optimization & Scale</strong>
+              <p>
+                We track show-up rates, offer performance, and close rates—
+                tightening the system until it becomes predictable.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about">
+          <div class="section-label">Why apex</div>
+          <h2 class="section-title">Built for high-ticket closers.</h2>
+          <p class="section-subtitle">
+            Apex Call Solutions exists for one reason: to keep serious closers in
+            serious conversations. We handle the grind—dialing, qualifying,
+            scheduling—so your sales team lives where they’re most valuable:
+            presenting and closing.
+          </p>
+        </section>
+
+        <!-- CTA STRIP / BOOK -->
+        <section id="book">
+          <div class="cta-strip">
+            <div>
+              <strong>Ready to see if Apex makes sense for you?</strong>
+              <p>
+                Book a short strategy call. We’ll review your current lead flow,
+                your close rates, and show you what an outbound engine could look
+                like for your business.
+              </p>
+            </div>
+            <button class="btn-primary">
+              Book a Strategy Call
+            </button>
+          </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact">
+          <div class="section-label">Contact</div>
+          <h2 class="section-title">Let’s talk about your pipeline.</h2>
+          <p class="section-subtitle">
+            Drop your info below and we’ll reach out with next steps. You can
+            also plug in your own form or calendar tool here (Calendly, HubSpot,
+            etc.).
+          </p>
+
+          <div class="card">
+            <!-- Replace this with your actual form embed code later -->
+            <p style="font-size:12px; color:var(--text-muted); margin-bottom:10px;">
+              Placeholder form — replace with your own embed from Calendly or your CRM.
+            </p>
+            <form>
+              <div style="display:grid; gap:10px; grid-template-columns:repeat(2,minmax(0,1fr)); margin-bottom:10px;">
+                <input type="text" placeholder="Full Name" required
+                  style="padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#020617; color:var(--text-main); font-size:12px;">
+                <input type="email" placeholder="Email" required
+                  style="padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#020617; color:var(--text-main); font-size:12px;">
+              </div>
+              <input type="text" placeholder="Business / Industry" 
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#020617; color:var(--text-main); font-size:12px; margin-bottom:10px;">
+              <textarea placeholder="Tell us about your current lead flow and sales goals..."
+                rows="3"
+                style="width:100%; padding:8px 10px; border-radius:8px; border:1px solid var(--border); background:#020617; color:var(--text-main); font-size:12px; margin-bottom:10px;"></textarea>
+              <button class="btn-primary" type="submit">Submit</button>
+            </form>
+          </div>
+        </section>
+      </main>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-inner">
+          <div>© <span id="year"></span> Apex Call Solutions. All rights reserved.</div>
+          <div class="footer-links">
+            <a href="#services">Services</a>
+            <a href="#book">Book a Call</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
